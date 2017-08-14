@@ -1,0 +1,93 @@
+<td>
+    <div class="tile" [attr.class]= "'tile ' + tileborder + ' ' + tilebackground">
+        <div *ngIf="detail.name == 'metrics'" class="col-sm-12">
+            <div class="col-sm-12 metrics-container"><h4>{{detail.name | initialCapitalize}}</h4></div>
+            <div class="col-sm-12 metrics-container">
+                <div class="col-sm-6 metrics-container">
+                    <div class="col-sm-8 metrics-sub-container">
+                        <span class="glyphicon glyphicon-arrow-up metrics-arrow"></span>
+                    </div>
+                    <div class="col-sm-4 metrics-count">
+                    <span>{{detail.testCount}}</span>
+                    </div>
+                    <span class="col-sm-12 metrics-text">Test</span>
+                </div>
+                <div class="col-sm-6 metrics-container">
+                    <div class="col-sm-8 metrics-sub-container">
+                        <span class="glyphicon glyphicon-arrow-up metrics-arrow"></span>
+                    </div>
+                    <div class="col-sm-4 metrics-count">
+                        <span>{{detail.maintainability}}</span>
+                    </div>
+                    <span class="col-sm-12 metrics-test-text metrics-container">Maintainability</span>
+                </div>
+            </div> 
+            <div class="col-sm-12 metrics-container metrics-footer">
+                <div class="col-sm-6 metrics-container">
+                    <div class="col-sm-8 metrics-sub-container">
+                        <span class="glyphicon glyphicon-arrow-right metrics-footer-arrow"></span>
+                    </div>
+                    <div class="col-sm-4 metrics-count">
+                        <span> {{detail.security}}</span>
+                    </div>
+                    <span class="col-sm-12 metrics-footer-text">Security</span>
+                 </div>
+                <div class="col-sm-6 metrics-container"> 
+                    <div class="col-sm-8 metrics-sub-container">
+                        <span class="glyphicon glyphicon-arrow-right metrics-footer-arrow"></span>
+                    </div>
+                    <div class="col-sm-4 metrics-count">
+                        <span> {{detail.workmanship}}</span>
+                    </div>
+                     <span class="col-sm-12 metrics-footer-text metrics-container">Workmanship</span>
+                </div>
+            </div>
+         </div>
+        <div *ngIf="detail.name == 'build'" class="col-sm-12">
+            <div class="col-sm-12"><h4>{{detail.name | initialCapitalize}}</h4></div>
+            <div class="col-sm-12 build-system">
+                    <div class="col-sm-6">
+                        <img src="../../assets/system.png" />
+                        <span>Debug</span>
+                    </div> 
+                    <div class="col-sm-6">
+                        <img src="../../assets/system.png" />
+                        <span>Release</span>
+                    </div> 
+            </div>
+            <div class="col-sm-12 build-footer" ><span>{{detail.startTime}}</span></div>
+        </div>
+        <div *ngIf="detail.name == 'unit'" class="col-sm-12 test-container">
+           <div class="col-sm-12"><h4>{{detail.name | initialCapitalize}} Test</h4></div>
+            <div class="col-sm-12 chart-container">
+                    <div class="col-sm-8">
+                        <pie-chart [pieChartData]="getPieData(detail.pass,detail.fail)"></pie-chart>
+                    </div>
+                    <div class="col-sm-4 percentage">
+                       <span class="big-text">
+                           {{detail.pass / (detail.pass + detail.fail) | percent:'2.0-0'}}</span>
+                        <span class="small-text">tests passed</span>
+                    </div>
+                </div>
+                <div class="col-sm-12 test-footer">
+                    <coverage-bar [coverage]="detail.coverage"></coverage-bar>
+             </div>
+        </div>
+        <div *ngIf="detail.name == 'functional'" class="col-sm-12 test-container">
+            <div class="col-sm-12"><h4>{{detail.name | initialCapitalize}} Test</h4></div>
+            <div class="col-sm-12 chart-container">
+                <div class="col-sm-8">
+                        <pie-chart [pieChartData]="getPieData(detail.pass,detail.fail)"></pie-chart>
+                    </div>
+                    <div class="col-sm-4 percentage">
+                       <span class="big-text">
+                           {{detail.pass / (detail.pass + detail.fail) | percent:'2.0-0'}}</span>
+                        <span class="small-text">tests passed</span>
+                    </div>
+            </div> 
+            <div class="col-sm-12 test-footer">
+                <coverage-bar [coverage]="detail.coverage"></coverage-bar>
+            </div>
+        </div>
+    </div>
+</td>

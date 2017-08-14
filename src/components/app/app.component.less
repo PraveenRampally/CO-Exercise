@@ -1,0 +1,174 @@
+@import "~bootstrap/less/bootstrap.less";
+
+@var-pending-color: #ccc;
+@var-running-color: steelblue;
+@var-failed-color:  #a94442;;
+@var-passed-color: #368137 ;
+@var-font-weight: 500;
+
+.body {
+  padding: 20px;
+ -webkit-transition: height .5s;
+  transition: height .5s;
+  font-family: Frutiger, 'Roboto Condensed', sans-serif, arial;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.42857;
+  overflow-y: scroll;
+}
+
+.build-container {
+  background: #f8f8f8;
+}
+
+table {
+  border-color: none !important;
+}
+
+table > tbody + tbody {
+    border-top: none !important;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: none !important;
+    border-top: none !important;
+}
+
+table tr.separator { height: 15px; }
+
+.box {
+  float: left;
+  width: 40px;
+  height: 30px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  background: @var-pending-color;
+ 
+}
+
+.running {
+  background-image: linear-gradient(left,@var-running-color,@var-running-color 60%, transparent 60%, transparent 100%);
+  background-image: -webkit-linear-gradient(left,@var-running-color,@var-running-color 60%, transparent 60%, transparent 100%)
+}
+
+.failed {
+  background: @var-failed-color;
+}
+
+.passed {
+  background: @var-passed-color;
+}
+
+.row-pending {
+  color: @var-pending-color;
+}
+
+.row-running {
+  color: @var-running-color;
+  font-weight: @var-font-weight;
+}
+
+.row-complete, .row-accepted {
+  color: @var-passed-color;
+   font-weight: @var-font-weight;
+}
+
+.row-rejected {
+  color: @var-failed-color;
+   font-weight: @var-font-weight;
+}
+
+.row-border-pending{
+   background-color: #e3e8ec;
+  
+}
+
+.row-border-running{
+   background-color: #b4d8f4;
+}
+
+.row-border-complete, .row-border-accepted{
+  background-color: #dff0d8;
+}
+
+.row-border-rejected{
+  background-color: #f2dede;
+}
+
+.tile {
+  float: left;
+  width: 270px;
+  height: 250px;
+  margin: 5px;
+  padding: 0;
+  cursor: pointer;
+  opacity: .9;
+}
+
+.tile:hover{
+	border-color: #666 #aaa #bbb #888;
+	border-width:2px 1px 1px 1px;
+}
+
+.tile-pending {
+  color: @var-pending-color;
+}
+
+.tile-running {
+  color: @var-running-color;
+}
+
+.tile-accepted {
+  color: #aaaa2b;
+}
+
+.tile-passed, .tile-complete {
+  color: @var-passed-color;
+}
+
+.tile-failed, .tile-rejected {
+  color: @var-failed-color;
+}
+
+.tile-border-running{
+  border: 3px solid @var-running-color;
+}
+
+.tile-border-passed{
+  border: 3px solid @var-passed-color;
+}
+
+.tile-border-failed{
+  border: 3px solid @var-failed-color;
+}
+
+.result-container {
+    text-align: center;
+    cursor: auto;
+
+    small{
+        font-weight: 500;
+    }
+
+    button {
+          margin-top: 20px;
+    }
+}
+
+.deploy-to {
+    margin-top: 20px;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+}
+ .deploy-to-text{
+   position: absolute;
+    margin-top: 30px;
+    margin-left: 10px;
+ }
+
+.build-name {
+  margin: 5px;
+}

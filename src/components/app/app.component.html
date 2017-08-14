@@ -1,0 +1,105 @@
+<div class="build-container">
+    <div class="container-fluid">
+        <div class="table-responsive col-12 col-sm-12 col-lg-12">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th class="col-sm-1">Change List / Build</th>
+                        <th class="col-sm-1">Owner</th>
+                        <th class="col-sm-1">Time Started</th>
+                        <th class="col-sm-1" >State</th>
+                        <th class="col-sm-1">Metrics</th>
+                        <th class="col-sm-1">Build</th>
+                        <th class="col-sm-1">Unit Test</th>
+                        <th class="col-sm-1">Functional Test</th>
+                    </tr>
+                </thead>
+                    <template ngFor let-build [ngForOf]="builds">
+                        <tbody [attr.class]="'row-border-' + build.state" >
+                            <tr [attr.class]="'row-' + build.state">
+                                <td class="col-sm-1">
+                                    <div>
+                                        <img [src]="'../../assets/' + build.type + '.png'" />
+                                        <span class="build-name" *ngIf="(build.state == 'complete') || (build.state == 'rejected') || (build.state == 'accepted')"> 
+                                                <a [href]="'#demo-' + build.id" data-toggle="collapse">{{build.name}} </a>
+                                        </span>
+                                        <span class="build-name" *ngIf="(build.state == 'pending') || (build.state == 'running')"> 
+                                                {{build.name}}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="col-sm-1">{{build.owner}}</td>
+                                <td class="col-sm-1">{{build.startTime}}</td>
+                                <td class="col-sm-1">{{build.state | initialCapitalize}}</td>
+                                <td class="col-sm-1">
+                                    <div [attr.class]="'box ' + build.build"></div>
+                                </td>
+                                <td class="col-sm-1">
+                                    <div [attr.class]="'box ' + build.metrics"></div>
+                                </td>
+                                <td class="col-sm-1">
+                                    <div [attr.class]="'box ' + build.unit"></div>
+                                </td>
+                                <td class="col-sm-1">
+                                    <div [attr.class]="'box ' + build.functional"></div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="(build.state == 'complete') || (build.state == 'rejected') || (build.state == 'accepted')">
+                                    <td colspan="12" class="hiddenRow">
+                                        <div class="collapse" [attr.id]="'demo-' + build.id">
+                                            <table class="col-sm-12">
+                                                <tbody>
+                                                    <tr>
+                                                        <build-detail *ngFor="let detail of build.details" [detail]="detail"
+                                                        [tileborder]="'tile-border-' + build[detail.name]" [tilebackground]="'tile-' + build[detail.name]">
+                                                        </build-detail>
+                                                        <td>
+                                                            <div class="tile result-container">
+                                                                <div class="col-sm-12">
+                                                                <h5>Result:</h5> 
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                <h3 [attr.class]= "'tile-' + build.state">
+                                                                <small> {{build.result.type | initialCapitalize}}</small> 
+                                                                <br>
+                                                                <strong> {{build.result.message | initialCapitalize}}</strong>
+                                                                </h3>
+                                                                </div>
+                                                                <div class="col-sm-12" *ngIf="build.state == 'rejected'">
+                                                                <button class="btn btn-default btn-info">
+                                                                    <i class="fa fa-search"></i>
+                                                                    <span>Find Issues</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-sm-12" *ngIf="build.state == 'accepted'">
+                                                                <button class="btn btn-default btn-info">
+                                                                    <i class="fa fa-search"></i>
+                                                                    <span>Merged Builds</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-sm-12" *ngIf="build.state == 'complete'">
+                                                                <span>
+                                                                    <button class="btn btn-default btn-success">Deploy</button>
+                                                                    <span class="deploy-to-text">to:</span>
+                                                                </span>
+                                                                <br/>
+                                                                <select class="deploy-to">
+                                                                    <option value="production">production</option>
+                                                                    <option value="qa">qa</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <tr class="separator"></tr>
+                        </tbody>
+                    </template>
+            </table>
+        </div>
+    </div>
+</div>
